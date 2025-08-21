@@ -68,13 +68,13 @@ def press_key_multiple_times(key, times, delay):
 
 def sale_event():
     try:
-        position = pyautogui.locateOnScreen("/home/dante/VSCode/.venv/projects/Project_5/Screenshot_20250821_204425.png", confidence=0.7)
+        position = pyautogui.locateOnScreen("/home/dante/VSCode/.venv/projects/BBOT/Screenshot_20250821_204425.png", confidence=0.7)
     except:
         position = None
     if position is not None:
         pyautogui.click(position[0] + 56 , position[1] + 50)
         try:
-            position1 = pyautogui.locateOnScreen("/home/dante/VSCode/.venv/projects/Project_5/Screenshot_20250821_214558.png", confidence=0.7)
+            position1 = pyautogui.locateOnScreen("/home/dante/VSCode/.venv/projects/BBOT/Screenshot_20250821_214558.png", confidence=0.7)
         except:
             position1 = None
         if position1 is not None:
@@ -112,6 +112,6 @@ def main():
     # Move the mouse to the center of the screen
     pyautogui.moveTo(screen_width // 2, screen_height // 2)
 
-    image_action("/home/dante/VSCode/.venv/projects/Project_5/Screenshot_20250821_014922.png", confidence=0.7)
+    image_action("/home/dante/VSCode/.venv/projects/BBOT/Screenshot_20250821_014922.png", confidence=0.7)
 
 main()
