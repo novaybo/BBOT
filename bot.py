@@ -12,10 +12,18 @@ global screen_width, screen_height
 screen_width, screen_height = pyautogui.size()
 
 exit_event = threading.Event()
+pause_event = threading.Event()
 
 def on_press(key):
     if key == keyboard.Key.esc:
         exit_event.set()
+    elif key == keyboard.Key.space:
+        if pause_event.is_set():
+            pause_event.clear()
+            print("Resuming...")
+        else:
+            pause_event.set()
+            print("Paused...")
 
 listener = keyboard.Listener(on_press=on_press)
 listener.start()
@@ -105,13 +113,30 @@ def image_action(i_p, confidence):
             print(f"An error occurred while processing the image action: {e}")
             pass
 
+def dungeon_mode():
+
+    while not exit_event.is_set():
+        if not pause_event.is_set():
+            press_key_multiple_times("1", 1, 0.2)
+            press_key_multiple_times("2", 10, 0.2)
+        else:
+            print("Paused... Press Space to resume.")
+            time.sleep(1)
+
 def main():
-    # Wait for 5 seconds to switch to the desired window
-    time.sleep(5)
+
+    mode = input("Choose mode: \n 1. Farm \n 2. Dungeon \n")
 
     # Move the mouse to the center of the screen
     pyautogui.moveTo(screen_width // 2, screen_height // 2)
 
-    image_action("/home/dante/VSCode/.venv/projects/BBOT/Screenshot_20250821_014922.png", confidence=0.7)
+    if mode == "1":
+        time.sleep(3)
+        image_action("/home/dante/VSCode/.venv/projects/BBOT/Screenshot_20250821_014922.png", confidence=0.7)
+    elif mode == "2":
+        time.sleep(3)
+        dungeon_mode()
+    else:
+        print("Invalid mode selected. Exiting.")
 
 main()
